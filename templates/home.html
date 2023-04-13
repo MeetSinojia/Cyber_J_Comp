@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>PE file checker</title>
+  <style>
+    /* CSS styling for the entire document */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+      text-align: center;
+    }
+
+    form {
+      margin: auto;
+      width: 50%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="submit"] {
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>PE file checker</h1>
+  <form method="POST" enctype="multipart/form-data" action="/check_pe">
+    <input type="file" name="file">
+    <br><br>
+    <input type="submit" value="Check file">
+  </form>
+  <hr>
+  <hr>
+  <h1>AES Encryption/Decryption Example</h1>
+  <h2>Encrypt</h2>
+  <form method="post" action="{{ url_for('encrypt') }}">
+    <label for="message">Message:</label>
+    <input type="text" id="message" name="message">
+    <br>
+    <input type="submit" value="Encrypt">
+  </form>
+
+  <h2>Decrypt</h2>
+  <form method="post" action="{{ url_for('decrypt') }}">
+    <label for="nonce">Nonce:</label>
+    <input type="text" id="nonce" name="nonce">
+    <br>
+    <label for="ciphertext">Ciphertext:</label>
+    <input type="text" id="ciphertext" name="ciphertext">
+    <br>
+    <label for="tag">Tag:</label>
+    <input type="text" id="tag" name="tag">
+    <br>
+    <input type="submit" value="Decrypt">
+  </form>
+  <hr>
+  <hr>
+  <h1>Digital Signature Generator</h1>
+  <form action="/generate_signature" method="POST">
+    <label for="message">Message:</label>
+    <input type="text" name="message" id="message" required><br><br>
+    <label for="key">Key:</label>
+    <input type="text" name="key" id="key" required><br><br>
+    <input type="submit" value="Generate Signature">
+  </form>
+  <br>
+  <form action="/verify_signature" method="POST">
+    <label for="message">Message:</label>
+    <input type="text" name="message" id="message" required><br><br>
+    <label for="key">Key:</label>
+    <input type="text" name="key" id="key" required><br><br>
+    <label for="signature">Signature:</label>
+    <input type="text" name="signature" id="signature" required><br><br>
+    <input type="submit" value="Verify Signature">
+  </form>
+  <hr>
+  <hr>
+  <h1>File Hash Generator</h1>
+  <form action="/generate" method="POST">
+    <label for="text">Enter text to generate hash:</label><br>
+    <input type="text" name="text"><br>
+    <input type="submit" value="Generate Hash">
+  </form>
+  <form action="/generate-file" method="POST" enctype="multipart/form-data">
+    <label for="file">Upload file to generate hash:</label><br>
+    <input type="file" name="file"><br>
+    <input type="submit" value="Generate Hash">
+  </form>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <label for="file">Upload file to verify hash:</label><br>
+    <input type="file" name="file"><br>
+    <label for="hash">Enter expected hash value:</label><br>
+    <input type="text" name="hash"><br>
+    <input type="submit" value="Verify Hash">
+  </form>
+</body>
+
+</html>
